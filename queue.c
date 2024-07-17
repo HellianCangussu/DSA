@@ -1,41 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 typedef struct queue {
   int front, rear;
-  int items[10];
+  int* items;
+  int size;
 } Queue;
 
-Queue *create() {
+Queue *create(int size) {
   Queue *q = malloc(sizeof(Queue *));
+  q->items = malloc(size * sizeof(int));
   q->front = q->rear = 0;
+  q->size = size;
   return q;
 }
 
-int empty(Queue** queue) {
-    return (*queue)->front == (*queue)->rear;
+int empty(Queue **queue) { return (*queue)->front == (*queue)->rear; }
+
+void enqueue(Queue **queue, int value) {
+  if ((*queue)->front == (*queue)->size) {
+    printf("queue is full");
+    return;
+  }
+  (*queue)->items[(*queue)->rear++] = value;
 }
 
-int full(Queue** queue, int size) {
-    return (*queue)->rear == size;
+int dequeue(Queue **queue) {
+  if ((*queue)->front == -1) {
+    printf("queue is empty");
+    return -1;
+  }
+  return (*queue)->items[(*queue)->front++];
 }
 
-void enqueue(Queue** queue, int value) {
-    (*queue)->items[(*queue)->rear++] = value;
-}
+int main() {
+  Queue *q = create(4);
+  enqueue(&q, 1);
+  enqueue(&q, 2);
+  enqueue(&q, 3);
+  enqueue(&q, 4);
 
-int dequeue(Queue** queue) {
-    return (*queue)->items[(*queue)->front++];
-}
+  for (int i = 0; i < q->size; i++) {
+    printf("%d \n", dequeue(&q));
+  }
 
-
-int main() { 
-    Queue *q = create();
-    enqueue(&q, 1);
-    enqueue(&q, 2);
-    enqueue(&q, 3);
-    enqueue(&q, 4);
-    int deq = dequeue(&q);
-    printf("%d\n", empty(&q));
-    return 0;
+  return 0;
 }
