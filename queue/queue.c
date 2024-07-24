@@ -1,12 +1,8 @@
+#include <stdatomic.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "queue.h"
 
-
-typedef struct queue {
-  int front, rear;
-  int* items;
-  int size;
-} Queue;
 
 Queue *create(int size) {
   Queue *q = malloc(sizeof(Queue *));

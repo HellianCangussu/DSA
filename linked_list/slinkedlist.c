@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "slinkedlist.h"//;
 
-typedef struct node {
-  int value;
-  struct node *next;
-} node;
 
 int length(node **head) {
   int i = 0;

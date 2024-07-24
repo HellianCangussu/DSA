@@ -1,12 +1,8 @@
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "stack.h"
 
-typedef struct stack {
-  int top;
-  int capacity;
-  int *array;
-} stack;
 
 stack *createStack(int capacity) {
   stack *new = malloc(sizeof(stack *));
