@@ -1,7 +1,6 @@
+#include "slinkedlist.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "slinkedlist.h"//;
-
 
 int length(node **head) {
   int i = 0;
@@ -15,7 +14,7 @@ int length(node **head) {
 
 void prepend(node **head, int value) {
   node *new_node = (node *)malloc(sizeof(node *));
-
+  node *new = (node *)malloc(sizeof(node *));
   if (!new_node) {
     printf("memory error");
     return;
@@ -103,8 +102,8 @@ void reverse(node **head) {
 }
 
 int findCycle(node *head) {
-  node* slow, *fast;
-  while(fast && fast->next) {
+  node *slow, *fast;
+  while (fast && fast->next) {
     slow = slow->next;
     fast = slow->next->next;
     if (slow == fast) {
